@@ -1,0 +1,64 @@
+
+Q2 : Write an Algorithm to find all unique triplets in the arrays which gives the sum of zero.
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0. Solution must not
+contain duplicate triplets
+
+#include <bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+int main() {
+    int n;
+    cin>>n;
+    int nums[n];
+    for(int i=0;i<n;i++){
+        cin>>nums[i];
+    }
+    sort(nums,nums+n);
+    for ( int i=0; i<n; i++) 
+    {
+        if ((i>0) && (nums[i]==nums[i-1]))
+            continue;
+        int l = i+1, r = n-1;
+        while (l<r) {
+            int s = nums[i]+nums[l]+nums[r];
+            if (s>0) r--;
+            else if (s<0) l++;
+            else {
+                cout<<nums[i]<<","<<nums[r]<<","<<nums[l]<<endl;
+                while (nums[l]==nums[l+1]) l++;
+                while (nums[r]==nums[r-1]) r--;
+                l++; r--;
+                }
+            }
+    }
+}
+
+
+
+Q3) Write a program to find if a string is a palindrome. Print true if the string is a palindrome and print false if it is
+not.
+
+
+#include <bits/stdc++.h>
+using namespace std;
+bool check_palindrome(string str){
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    int left = 0;
+    int right = str.length()-1;
+    while(left<right){
+        if(str[left++]!=str[right--]){
+            return false;
+        }
+    }
+    return true;
+}
+int main() {
+    string str;
+    cin>>str;
+    if(check_palindrome(str)){
+        cout<<"True";
+    }
+    else{
+        cout<<"False";
+    }
+}
